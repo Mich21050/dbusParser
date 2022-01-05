@@ -1,0 +1,2 @@
+A simple python script to convert the output of the dbus monitor command to dbus-send commands
+Usage should be self explanatory and you might have to edit the script for it to fit your requirements
