@@ -12,7 +12,6 @@ def main():
     parsD = []
 
     curEl = -1
-    global i
     for curL in inp:
         curD = {}
         if curL.split()[0] == "signal" or curL.split()[0] == "method":
@@ -58,7 +57,6 @@ def main():
                 subStruct['type'] = res[0]
                 subStruct['value'] = res[1].replace('"','')
                 parsD[curEl]['data'].append(subStruct)
-    print(json.dumps(parsD))
     jsonWriter(jsonFile,parsD)
 
     fC = open(outFile,'w')
