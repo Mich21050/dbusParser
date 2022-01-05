@@ -1,22 +1,20 @@
 import json
-def searchPart(listIn, searchT):
-    for i, elem in enumerate(listIn):
-        if searchT in elem:
-            return i
 
+#simple config
+inpFile = "inp.txt"
+outFile = "outCmd.txt"
+jsonFile = None #set None if you dont need it as a json (helpful when debugging)
 
 def main():
-    f = open("inp.txt")
+    f = open(inpFile)
     inp = f.readlines()
     f.close()
-    #print(inp)
     parsD = []
 
     curEl = -1
     global i
-    for i in range(len(inp)):
+    for curL in inp:
         curD = {}
-        curL = inp[i]
         if curL.split()[0] == "signal" or curL.split()[0] == "method":
             curD["mainStr"] = curL
             spltMain = curL.split()
@@ -60,12 +58,10 @@ def main():
                 subStruct['type'] = res[0]
                 subStruct['value'] = res[1].replace('"','')
                 parsD[curEl]['data'].append(subStruct)
-    #print(parsD)
     print(json.dumps(parsD))
-    with open('out.json','w') as fS:
-        fS.write(json.dumps(parsD, indent=4))
+    jsonWriter(jsonFile,parsD)
 
-    fC = open('outCmd.txt','w')
+    fC = open(outFile,'w')
     cmdLi = []
     for el in parsD:
         curM = el['main']
@@ -83,6 +79,17 @@ def main():
     for wEl in cmdLi:
         fC.write(wEl + '\n')
     fC.close()
+
+def searchPart(listIn, searchT):
+    for i, elem in enumerate(listIn):
+        if searchT in elem:
+            return i
+
+def jsonWriter(path, dictIn):
+    if path != None:
+        with open(path,'w') as fS:
+            fS.write(json.dumps(dictIn, indent=4))
+
 
 if __name__ == '__main__':
     main()

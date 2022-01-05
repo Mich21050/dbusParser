@@ -1,2 +1,5 @@
 A simple python script to convert the output of the dbus monitor command to dbus-send commands
 Usage should be self explanatory and you might have to edit the script for it to fit your requirements
+The script is currently customized to work with the dbus found on an Amazon Alexa (see my other repo)
+
+Testet with python3 and python2
